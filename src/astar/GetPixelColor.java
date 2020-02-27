@@ -12,33 +12,31 @@ import java.io.IOException;
 //-534826 == light red (corridor)
 
 public class GetPixelColor {
-    public static void main(String[] args) throws IOException {
-        int[][] result = getRGBarray(image);
-        for(int i = 0; i<result.length; i++){
-            for(int j = 0; j<result[i].length; j++) {
-                //System.out.println(result[i][j]);
-                if (result[i][j] != 0) {
-                    if (result[i][j] == -534826) {
-                        System.out.print(1);
-                    } else {
-                        System.out.print(0);
-                    }
-                }
-            }
-            System.out.println();
-        }
-
-
-
-    }
 
     protected static void scalePNG(String path, String newPath, int targetSize){
         try {
             BufferedImage scaledImage = Scalr.resize(ImageIO.read(new File(path)), targetSize);
-            ImageIO.write(scaledImage, "png", new File("scaled"+path));
+            ImageIO.write(scaledImage, "png", new File(newPath));
         }catch (IOException e){
             System.out.println(e.toString());
         }
+    }
+
+    protected static boolean[][] createBinaryArr(int[][] arrRGB){
+        boolean[][] boolArr = new boolean[arrRGB.length][arrRGB[arrRGB.length-1].length];
+        for(int i = 0; i<arrRGB.length; i++){
+            for(int j = 0; j<arrRGB[i].length; j++) {
+                //System.out.println(result[i][j]);
+                if (arrRGB[i][j] != 0) {
+                    if (arrRGB[i][j] != -534826) {
+                        boolArr[i][j] = true;
+                    } else {
+                        boolArr[i][j] = false;
+                    }
+                }
+            }
+        }
+        return boolArr;
     }
 
 

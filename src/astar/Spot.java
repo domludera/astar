@@ -15,7 +15,7 @@ public class Spot {
     public boolean wall;
 
 
-    public Spot(int x, int y) {
+    public Spot(int x, int y, boolean b) {
         this.x = x;
         this.y = y;
         this.f = 0;
@@ -23,11 +23,7 @@ public class Spot {
         this.h = 0;
         this.neighbors = new ArrayList<>();
         this.previous = null;
-
-        this.wall = Math.random() < 0.3;
-        if (this.x < 3 && this.y < 3) {
-            this.wall = false;
-        }
+        this.wall = b;
     }
 
     public void setPrevious(Spot previous) {
@@ -71,15 +67,39 @@ public class Spot {
         return g;
     }
 
-    public void setG(double g) {
-        this.g = g;
+    public void setG(Spot current) {
+        this.g = current.getG() + euclidean(this,current);
     }
 
     public double getH() {
         return h;
     }
 
-    public void setH(double h) {
-        this.h = h;
+    public void setH(Spot end) {
+        this.h = euclidean(this,end);
     }
+
+    public double euclidean(Spot a, Spot b){
+        double x = a.getX()-b.getX();
+        double y = a.getY()-b.getY();
+        return (Math.pow(x,2)+Math.pow(y,2));
+    }
+
+    public double manh(Spot a, Spot b){
+        double x = Math.abs(a.getX()-b.getX());
+        double y = Math.abs(a.getY()-b.getY());
+        return x + y;
+
+    }
+
+    public void toPrint(){
+        System.out.println("H "+this.getH());
+        System.out.println("G "+this.getG());
+        System.out.println("F "+this.getF());
+    }
+
+    public boolean equals(Spot toCompare){
+        return this.x == toCompare.x && this.y == toCompare.y;
+    }
+
 }
