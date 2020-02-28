@@ -17,22 +17,26 @@ public class GetPixelColor {
         BufferedImage image = ImageIO.read(new File("media/h8scaled.png"));
 
         int[][] result = getRGBarray(image);
-        for(int i = 0; i<result.length; i++){
-            for(int j = 0; j<result[i].length; j++) {
-                //System.out.println(result[i][j]);
-                if (result[i][j] != 0) {
-                    if (result[i][j] == -534826) {
-                        System.out.print(0);
+        boolean[][] bool = getBoolArr(result, -534826);
+
+
+
+    }
+
+    protected static boolean[][] getBoolArr(int[][] arr, int walkable){
+        boolean[][] boolArr = new boolean[arr.length][arr[arr.length-1].length];
+        for(int i = 0; i<arr.length; i++){
+            for(int j = 0; j<arr[i].length; j++) {
+                if (arr[i][j] != 0) {
+                    if (arr[i][j] == walkable) {
+                        boolArr[i][j] = false;
                     } else {
-                        System.out.print(1);
+                        boolArr[i][j] = true;
                     }
                 }
             }
-            System.out.println();
         }
-
-
-
+        return boolArr;
     }
 
     protected static void scalePNG(String path, String newPath, int targetSize){

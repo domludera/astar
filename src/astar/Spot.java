@@ -15,7 +15,7 @@ public class Spot {
     public boolean wall;
 
 
-    public Spot(int x, int y) {
+    public Spot(int x, int y, boolean wall) {
         this.x = x;
         this.y = y;
         this.f = 0;
@@ -24,10 +24,7 @@ public class Spot {
         this.neighbors = new ArrayList<>();
         this.previous = null;
 
-        this.wall = Math.random() < 0.3;
-        if (this.x < 3 && this.y < 3) {
-            this.wall = false;
-        }
+        this.wall = wall;
     }
 
     public void setPrevious(Spot previous) {
@@ -81,5 +78,16 @@ public class Spot {
 
     public void setH(double h) {
         this.h = h;
+
+    }
+
+    public boolean equals(Spot b){
+        return this.x == b.x && this.y == b.y;
+    }
+
+    public double euclidean(Spot a, Spot b) {
+        int deltaX = a.x - b.x;
+        int deltaY = a.y - b.y;
+        return Math.sqrt(Math.pow(deltaX,2) + Math.pow(deltaY,2));
     }
 }
