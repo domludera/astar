@@ -13,15 +13,18 @@ import java.io.IOException;
 
 public class GetPixelColor {
     public static void main(String[] args) throws IOException {
+
+        BufferedImage image = ImageIO.read(new File("media/h8scaled.png"));
+
         int[][] result = getRGBarray(image);
         for(int i = 0; i<result.length; i++){
             for(int j = 0; j<result[i].length; j++) {
                 //System.out.println(result[i][j]);
                 if (result[i][j] != 0) {
                     if (result[i][j] == -534826) {
-                        System.out.print(1);
-                    } else {
                         System.out.print(0);
+                    } else {
+                        System.out.print(1);
                     }
                 }
             }
