@@ -81,13 +81,13 @@ public class Spot {
 
     }
 
-    public boolean equals(Spot b){
+    public boolean equals(Spot b) {
         return this.x == b.x && this.y == b.y;
     }
 
     public double euclidean(Spot a, Spot b) {
         int deltaX = a.x - b.x;
         int deltaY = a.y - b.y;
-        return Math.sqrt(Math.pow(deltaX,2) + Math.pow(deltaY,2));
+        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     }
 }

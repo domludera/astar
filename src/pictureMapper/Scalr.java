@@ -2,13 +2,13 @@ package pictureMapper;
 
 /**
  * Copyright 2011 The Buzz Media, LLC
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,28 +16,12 @@ package pictureMapper;
  * limitations under the License.
  */
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.Transparency;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.AreaAveragingScaleFilter;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ColorConvertOp;
-import java.awt.image.ColorModel;
-import java.awt.image.ConvolveOp;
-import java.awt.image.ImagingOpException;
-import java.awt.image.IndexColorModel;
-import java.awt.image.Kernel;
-import java.awt.image.RasterFormatException;
-import java.awt.image.RescaleOp;
-
-import javax.imageio.ImageIO;
+import java.awt.image.*;
 
 /**
  * Class used to implement performant, high-quality and intelligent image
@@ -310,8 +294,8 @@ public class Scalr {
      * @since 3.0
      */
     public static final ConvolveOp OP_ANTIALIAS = new ConvolveOp(
-            new Kernel(3, 3, new float[] { .0f, .08f, .0f, .08f, .68f, .08f,
-                    .0f, .08f, .0f }), ConvolveOp.EDGE_NO_OP, null);
+            new Kernel(3, 3, new float[]{.0f, .08f, .0f, .08f, .68f, .08f,
+                    .0f, .08f, .0f}), ConvolveOp.EDGE_NO_OP, null);
 
     /**
      * A {@link RescaleOp} used to make any input image 10% darker.
@@ -1657,7 +1641,7 @@ public class Scalr {
                  * re-calculate a proportionally correct value based on the
                  * targetWidth.
                  */
-                targetHeight = (int)Math.ceil((float) targetWidth * ratio);
+                targetHeight = (int) Math.ceil((float) targetWidth * ratio);
 
                 if (DEBUG && originalTargetHeight != targetHeight)
                     log(1,

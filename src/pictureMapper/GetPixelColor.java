@@ -6,6 +6,11 @@ import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class and driver is used to transform Maps(images) to Boolean Arrays
+ * You can use this driver to scale images using scalePNG("path-of-image", "where-to-save-with filename", "scale to size")
+ */
+
 //-2476490 == dark red (classroom)
 //-534826 == light red (corridor)
 
@@ -13,17 +18,15 @@ public class GetPixelColor {
     public static void main(String[] args) throws IOException {
 
 
-        scalePNG("media/h9.png", "media/h9275.png", 275 );
-
-
+        scalePNG("media/h9.png", "media/h9275.png", 275);
 
 
     }
 
-    public static boolean[][] getBoolArr(int[][] arr, int walkable){
-        boolean[][] boolArr = new boolean[arr.length][arr[arr.length-1].length];
-        for(int i = 0; i<arr.length; i++){
-            for(int j = 0; j<arr[i].length; j++) {
+    public static boolean[][] getBoolArr(int[][] arr, int walkable) {
+        boolean[][] boolArr = new boolean[arr.length][arr[arr.length - 1].length];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
                 if (arr[i][j] != 0) {
                     if (arr[i][j] == walkable) {
                         boolArr[i][j] = false;
@@ -36,17 +39,14 @@ public class GetPixelColor {
         return boolArr;
     }
 
-    protected static void scalePNG(String path, String newPath, int targetSize){
+    protected static void scalePNG(String path, String newPath, int targetSize) {
         try {
             BufferedImage scaledImage = Scalr.resize(ImageIO.read(new File(path)), targetSize);
             ImageIO.write(scaledImage, "png", new File(newPath));
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.toString());
         }
     }
-
-
-
 
 
     public static int[][] getRGBarray(BufferedImage image) {

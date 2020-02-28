@@ -1,6 +1,6 @@
+import astar.Spot;
 import drawing.DrawingBoard;
 import drawing.MyDrawable;
-import astar.Spot;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -8,13 +8,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static astar.A_Star.*;
+import static astar.A_Star.A_Star;
+import static astar.A_Star.linkNeighbors;
 import static drawing.DrawingBoard.createGui;
 import static pictureMapper.GetPixelColor.getBoolArr;
 import static pictureMapper.GetPixelColor.getRGBarray;
 
 
-public class Main  {
+public class Main {
 
     static final int w = 2;
     static final int h = 2;
@@ -35,15 +36,15 @@ public class Main  {
             Spot[][] grid = createGridFromMap("media/h9275.png");
             drawMap(grid);
             linkNeighbors(grid);
-            Spot path = A_Star(grid,x1,y1,x2,y2);
+            Spot path = A_Star(grid, x1, y1, x2, y2);
             drawPath(path);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Image does not exist");
         }
 
     }
 
-    public static Spot[][] createGridFromMap(String path) throws IOException{
+    public static Spot[][] createGridFromMap(String path) throws IOException {
 
 
         BufferedImage image = ImageIO.read(new File(path));
@@ -51,7 +52,7 @@ public class Main  {
         int[][] result = getRGBarray(image);
         boolean[][] bool = getBoolArr(result, -534826);
 
-        Spot[][] grid = new Spot[bool.length][bool[bool.length-1].length];
+        Spot[][] grid = new Spot[bool.length][bool[bool.length - 1].length];
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
@@ -63,7 +64,7 @@ public class Main  {
 
     }
 
-    public static void drawMap(Spot[][] grid){
+    public static void drawMap(Spot[][] grid) {
         gui = createGui(grid.length, grid[0].length);
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
@@ -88,9 +89,6 @@ public class Main  {
         }
 
     }
-
-
-
 
 
 }

@@ -1,14 +1,12 @@
 package astar;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class A_Star {
 
 
-    public static void linkNeighbors(Spot[][] grid){
+    public static void linkNeighbors(Spot[][] grid) {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < (grid[i].length) - 1; j++) {
                 if (i > 0) {
@@ -40,11 +38,11 @@ public class A_Star {
 
         Spot start = grid[x1][y1];
         Spot end = grid[x2][y2];
-        if(start.wall){
+        if (start.wall) {
             System.out.println("Start point is a wall");
             return null;
         }
-        if(end.wall){
+        if (end.wall) {
             System.out.println("End point is a wall");
             return null;
         }
@@ -69,13 +67,11 @@ public class A_Star {
 //            }
 
 
-
-
             //check the node in the openSet with lowest F score
             current = openSet.get(0);
 
-            for(Spot candidate : openSet){
-                if(candidate.getF()<current.getF()){
+            for (Spot candidate : openSet) {
+                if (candidate.getF() < current.getF()) {
                     current = candidate;
                 }
             }
@@ -89,18 +85,15 @@ public class A_Star {
 //            gui.addMyDrawable(green);
 
 
-
-
-
-            for(Spot neighbor : current.getNeighbors()){
-                if(!closedSet.contains(neighbor) && !neighbor.wall){
+            for (Spot neighbor : current.getNeighbors()) {
+                if (!closedSet.contains(neighbor) && !neighbor.wall) {
                     double tent_score = current.getG() + euclidean(current, neighbor);
 
-                    if(openSet.contains(neighbor)){
-                        if(tent_score <= neighbor.getG()){
+                    if (openSet.contains(neighbor)) {
+                        if (tent_score <= neighbor.getG()) {
                             neighbor.setG(tent_score);
                         }
-                    }else{
+                    } else {
                         neighbor.setG(tent_score);
                         openSet.add(neighbor);
 
@@ -111,13 +104,13 @@ public class A_Star {
 
                     neighbor.setPrevious(current);
 
-                    neighbor.setH(euclidean(neighbor,end));
+                    neighbor.setH(euclidean(neighbor, end));
                     neighbor.updateF();
                 }
 
             }
 
-            if(current.equals(end)){
+            if (current.equals(end)) {
                 path = current;
                 break;
             }
@@ -136,11 +129,8 @@ public class A_Star {
     static public double euclidean(Spot a, Spot b) {
         int deltaX = a.getX() - b.getX();
         int deltaY = a.getY() - b.getY();
-        return Math.sqrt(Math.pow(deltaX,2) + Math.pow(deltaY,2));
+        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     }
-
-
-
 
 
 }
