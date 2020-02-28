@@ -1,4 +1,4 @@
-package astar;
+package pictureMapper;
 
 /**
  * Copyright 2011 The Buzz Media, LLC

@@ -1,10 +1,8 @@
-package astar;
+package pictureMapper;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,16 +12,15 @@ import java.io.IOException;
 public class GetPixelColor {
     public static void main(String[] args) throws IOException {
 
-        BufferedImage image = ImageIO.read(new File("media/h8scaled.png"));
 
-        int[][] result = getRGBarray(image);
-        boolean[][] bool = getBoolArr(result, -534826);
+        scalePNG("media/h9.png", "media/h9275.png", 275 );
+
 
 
 
     }
 
-    protected static boolean[][] getBoolArr(int[][] arr, int walkable){
+    public static boolean[][] getBoolArr(int[][] arr, int walkable){
         boolean[][] boolArr = new boolean[arr.length][arr[arr.length-1].length];
         for(int i = 0; i<arr.length; i++){
             for(int j = 0; j<arr[i].length; j++) {
@@ -42,7 +39,7 @@ public class GetPixelColor {
     protected static void scalePNG(String path, String newPath, int targetSize){
         try {
             BufferedImage scaledImage = Scalr.resize(ImageIO.read(new File(path)), targetSize);
-            ImageIO.write(scaledImage, "png", new File("scaled"+path));
+            ImageIO.write(scaledImage, "png", new File(newPath));
         }catch (IOException e){
             System.out.println(e.toString());
         }
@@ -52,7 +49,7 @@ public class GetPixelColor {
 
 
 
-    protected static int[][] getRGBarray(BufferedImage image) {
+    public static int[][] getRGBarray(BufferedImage image) {
 
         final byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
         final int width = image.getWidth();

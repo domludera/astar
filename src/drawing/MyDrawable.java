@@ -1,9 +1,9 @@
-package astar;
+package drawing;
 
 
 import java.awt.*;
 
-class MyDrawable {
+public class MyDrawable {
     private Shape shape;
     private Color color;
     private Stroke stroke;

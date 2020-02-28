@@ -1,4 +1,4 @@
-package astar;
+package drawing;
 
 import javax.swing.*;
 import java.awt.*;
