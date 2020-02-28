@@ -14,6 +14,17 @@ public class Spot {
     private Spot previous;
     public boolean wall;
 
+    public Spot(){
+        this.x = 0;;
+        this.f = 0;
+        this.g = 0;
+        this.h = 0;
+        this.neighbors = new ArrayList<>();
+        this.previous = null;
+        this.wall = false;
+
+    }
+
 
     public Spot(int x, int y, boolean b) {
         this.x = x;

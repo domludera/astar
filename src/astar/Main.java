@@ -88,11 +88,11 @@
 //        System.out.println("Neighbours done!");
 //
 //        start = grid[50][50];
-//        end = grid[127][195];
+//        end = grid[50][195];
 //
 //
 //        double total_h = manh(start, end);
-//        start.setH(total_h);
+//        start.setH(end);
 //        start.updateF();
 //
 //        System.out.println("Starting Algo..");
@@ -103,7 +103,7 @@
 //
 //        for (int i = 0; i < grid.length; i++) {
 //            for (int j = 0; j < grid[i].length; j++) {
-//                if (grid[i][j].wall) {
+//                if (!grid[i][j].wall) {
 //                    MyDrawable gridSquare = new MyDrawable(new Rectangle(i * w, j * h, w, h), Color.WHITE, new BasicStroke(1), true);
 //                    gui.addMyDrawable(gridSquare);
 //                }else{

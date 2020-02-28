@@ -11,17 +11,17 @@ import static astar.DrawingBoard.createGui;
 
 public class Main2 {
 
-    static final int w = 5;
-    static final int h = 5;
+    static final int w = 20;
+    static final int h = 20;
 
     public static DrawingBoard gui;
 
     public static void main(String[] args) throws IOException {
 
         int x1 = 50;
-        int y1 = 45;
-        int x2 = 195;
-        int y2 = 48;
+        int y1 = 50;
+        int x2 = 45;
+        int y2 = 200;
 
 
         GetPixelColor.scalePNG("media/h8.png", "media/100h8.png", 250);
@@ -39,6 +39,10 @@ public class Main2 {
 
 
 //        boolean[][] boolArr = {{false, true, false},{false,false,false},{false,true,false}};
+//        int x1 = 0;
+//        int y1 = 0;
+//        int x2 = 2;
+//        int y2 = 2;
 
         A_Star2 path = new A_Star2();
 
@@ -53,7 +57,7 @@ public class Main2 {
 
         for (int i = 0; i < boolArr.length; i++) {
             for (int j = 0; j < boolArr[i].length; j++) {
-                if (boolArr[i][j]) {
+                if (!boolArr[i][j]) {
                     MyDrawable gridSquare = new MyDrawable(new Rectangle(i * w, j * h, w, h), Color.BLACK, new BasicStroke(1), true);
                     gui.addMyDrawable(gridSquare);
                 }else{

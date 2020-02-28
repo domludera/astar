@@ -12,58 +12,96 @@ public class A_Star2 {
         Spot start = grid[x1][y1];
         Spot end = grid[x2][y2];
 
-
         Spot final_node = null;
 
         List<Spot> openSet = new ArrayList<>();
         List<Spot> closedSet = new ArrayList<>();
 
-        Spot curr_node = start;
-        curr_node.setH(end);
-        curr_node.setG(curr_node);
-        curr_node.updateF();
+        openSet.add(start);
 
-        openSet.add(curr_node);
-
+        Spot current;
 
         while(openSet.size()>0){
+            current = lowestF(openSet);
+            closedSet.add(current);
+            openSet.remove(current);
 
-            for(Spot current : openSet){
-                if(current.getF()<= curr_node.getF()){
-                    curr_node = current;
-                }
-            }
-
-            if(curr_node.equals(end)){
-                final_node = curr_node;
+            if(current.equals(end)){
+                final_node = current;
                 break;
             }
 
-            closedSet.add(curr_node);
-            openSet.remove(curr_node);
-
-            for(Spot neighbor : curr_node.getNeighbors()){
-                if(!closedSet.contains(neighbor)) {
-                    if (!openSet.contains(neighbor) && !neighbor.wall) {
-                        neighbor.setG(curr_node);
-                        neighbor.setH(end);
-                        neighbor.updateF();
-                        neighbor.setPrevious(curr_node);
-                        openSet.add(neighbor);
-                    } else {
-                        double tent_score = curr_node.getG() + euclidean(curr_node, neighbor);
-                        if (tent_score <= neighbor.getG()) {
-                            neighbor.setG(curr_node);
-                            neighbor.updateF();
-                            neighbor.setPrevious(curr_node);
-                        }
+            for(Spot neighbor : current.getNeighbors()){
+                if(!openSet.contains(neighbor)){
+                    neighbor.setPrevious(current);
+                    neighbor.setH(end);
+                    neighbor.setG(current);
+                    openSet.add(neighbor);
+                }else{
+                    if( neighbor.getG() > (current.getG()+euclidean(neighbor,current)) ){
+                        neighbor.setPrevious(current);
+                        neighbor.setG(current);
                     }
                 }
             }
         }
-
         return final_node;
     }
+
+    public Spot lowestF(List<Spot> list){
+        Spot lowestF = null;
+        if(list.size()>0){
+            lowestF = list.get(0);
+            for(Spot lowest : list){
+                if(lowest.getF()<lowestF.getF()){
+                    lowestF = lowest;
+                }
+            }
+        }
+        return lowestF;
+    }
+
+//    public final List<T> findPath(int oldX, int oldY, int newX, int newY) {
+//        openList = new LinkedList<T>();
+//        closedList = new LinkedList<T>();
+//        openList.add(nodes[oldX][oldY]); // add starting node to open list
+//
+//        done = false;
+//        T current;
+//        while (!done) {
+//            current = lowestFInOpen(); // get node with lowest fCosts from openList
+//            closedList.add(current); // add current node to closed list
+//            openList.remove(current); // delete current node from open list
+//
+//            if ((current.getxPosition() == newX)
+//                    && (current.getyPosition() == newY)) { // found goal
+//                return calcPath(nodes[oldX][oldY], current);
+//            }
+//
+//            // for all adjacent nodes:
+//            List<T> adjacentNodes = getAdjacent(current);
+//            for (int i = 0; i < adjacentNodes.size(); i++) {
+//                T currentAdj = adjacentNodes.get(i);
+//                if (!openList.contains(currentAdj)) { // node is not in openList
+//                    currentAdj.setPrevious(current); // set current node as previous for this node
+//                    currentAdj.sethCosts(nodes[newX][newY]); // set h costs of this node (estimated costs to goal)
+//                    currentAdj.setgCosts(current); // set g costs of this node (costs from start to this node)
+//                    openList.add(currentAdj); // add node to openList
+//                } else { // node is in openList
+//                    if (currentAdj.getgCosts() > currentAdj.calculategCosts(current)) { // costs from current node are cheaper than previous costs
+//                        currentAdj.setPrevious(current); // set current node as previous for this node
+//                        currentAdj.setgCosts(current); // set g costs of this node (costs from start to this node)
+//                    }
+//                }
+//            }
+//
+//            if (openList.isEmpty()) { // no path exists
+//                return new LinkedList<T>(); // return empty list
+//            }
+//        }
+//        return null; // unreachable
+//    }
+
 
     public Spot[][] linkNeighbors(boolean boolArr[][]){
 
@@ -101,7 +139,6 @@ public class A_Star2 {
         return grid;
 
     }
-
 
     public double euclidean(Spot a, Spot b){
         double x = a.getX()-b.getX();

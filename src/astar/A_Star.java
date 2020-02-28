@@ -66,11 +66,11 @@
 
 //                        if (openSet.contains(neighbor)) {
 //                            if (tent_score < neighbor.getG()) {
-//                                neighbor.setG(tent_score);
+//                                neighbor.setG(curr_Node);
 //                            }
 
 //                        } else {
-//                            neighbor.setG(tent_score);
+//                            neighbor.setG(curr_Node);
 //                            openSet.add(neighbor);
 
 //                            //*** PART OF DRAWING ***
@@ -84,7 +84,7 @@
 
 //                        neighbor.setPrevious(curr_Node);
 
-//                        neighbor.setH(manh(neighbor, end));
+//                        neighbor.setH(end);
 //                        neighbor.updateF();
 //                    }
 
