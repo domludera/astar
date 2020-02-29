@@ -18,7 +18,7 @@ public class GetPixelColor {
     public static void main(String[] args) throws IOException {
 
 
-        scalePNG("media/h9.png", "media/h9275.png", 275);
+        scalePNG("media/h9.png", "media/h9325.png", 325);
 
 
     }
@@ -27,7 +27,9 @@ public class GetPixelColor {
         boolean[][] boolArr = new boolean[arr.length][arr[arr.length - 1].length];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-                if (arr[i][j] != 0) {
+                if (arr[i][j] == 0) {
+                    boolArr[i][j] = true;
+                }else{
                     if (arr[i][j] == walkable) {
                         boolArr[i][j] = false;
                     } else {

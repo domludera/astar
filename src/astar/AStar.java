@@ -3,7 +3,7 @@ package astar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class A_Star {
+public class AStar {
 
 
     public static void linkNeighbors(Spot[][] grid) {
@@ -32,7 +32,7 @@ public class A_Star {
     }
 
 
-    public static Spot A_Star(Spot[][] grid, int x1, int y1, int x2, int y2) {
+    public static Spot algo(Spot[][] grid, int x1, int y1, int x2, int y2) {
         java.util.List<Spot> openSet = new ArrayList<>();
         List<Spot> closedSet = new ArrayList<>();
 
@@ -71,6 +71,11 @@ public class A_Star {
             current = openSet.get(0);
 
             for (Spot candidate : openSet) {
+                if(candidate.getF() == current.getF()){
+                    if(candidate.getG() < current.getG()){
+                        current = candidate;
+                    }
+                }
                 if (candidate.getF() < current.getF()) {
                     current = candidate;
                 }
@@ -90,7 +95,7 @@ public class A_Star {
                     double tent_score = current.getG() + euclidean(current, neighbor);
 
                     if (openSet.contains(neighbor)) {
-                        if (tent_score <= neighbor.getG()) {
+                        if (tent_score < neighbor.getG()) {
                             neighbor.setG(tent_score);
                         }
                     } else {
@@ -121,7 +126,7 @@ public class A_Star {
     }
 
     //manhattan distance formula
-    public int manh(Spot a, Spot b) {
+    public static double euclidean2(Spot a, Spot b) {
         return (Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY()));
     }
 
@@ -129,7 +134,7 @@ public class A_Star {
     static public double euclidean(Spot a, Spot b) {
         int deltaX = a.getX() - b.getX();
         int deltaY = a.getY() - b.getY();
-        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        return (Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)));
     }
 
 
