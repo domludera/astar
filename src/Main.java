@@ -38,9 +38,9 @@ public class Main {
 
 
         String start = "H-903";
-        String end = "H-929";
+        String end = "H-961-21";
         String floor = "9";
-        String path = "metadata/9th-floor-hall";
+        String path = "metadata/9th-floor-test";
 
         // converts existing metadata to JSON object
         MetaData.metaToJson(path, 9, "Hall");
